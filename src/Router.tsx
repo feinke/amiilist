@@ -1,6 +1,7 @@
 import React from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { Login, Home, Wishlist } from './pages';
+import { LoginLink } from './containers/LoginContainer';
 
 const Router = () => {
   return (
@@ -8,7 +9,7 @@ const Router = () => {
       <Switch>
         <Route path="/home" component={Home}></Route>
         <Route path="/wishlist" component={Wishlist}></Route>
-        <Route path="/" component={Login}></Route>
+        <Route path="/" component={LoginLink}></Route>
       </Switch>
     </HashRouter>
   );
