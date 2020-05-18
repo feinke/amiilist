@@ -1,4 +1,4 @@
-import { Item, WishlistActions, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "../actions/wishlist/types";
+import { Item, WishlistActions, ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "../constants/wishlistTypes";
 
 const initialState: Item[] = [];
 

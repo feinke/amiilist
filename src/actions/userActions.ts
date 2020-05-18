@@ -1,4 +1,4 @@
-import { UserState, SetUserSessionAction, SET_USER_SESSION, UnsetUserSessionAction, UNSET_USER_SESSION } from "./types";
+import { UserState, SetUserSessionAction, SET_USER_SESSION, UnsetUserSessionAction, UNSET_USER_SESSION } from "../constants/userTypes";
 
 export const setUserSession = (user: UserState): SetUserSessionAction => {
   return {

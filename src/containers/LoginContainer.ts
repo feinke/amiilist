@@ -1,5 +1,5 @@
 import { connect, ConnectedProps } from "react-redux";
-import { setUserSession } from "../actions/user/userActions";
+import { setUserSession } from "../actions/userActions";
 import { Login } from "../pages";
 import {RootState} from "../reducers";
 
@@ -18,4 +18,4 @@ const connector = connect(
 
 export type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export const LoginLink = connector(Login);
+export const LoginContainer = connector(Login);

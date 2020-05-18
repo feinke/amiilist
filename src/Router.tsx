@@ -1,18 +1,33 @@
-import React from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
-import { Login, Home, Wishlist } from './pages';
-import { LoginLink } from './containers/LoginContainer';
+import React from "react";
+import { HashRouter, Route, Switch } from "react-router-dom";
+import { Login, Home, Wishlist } from "./pages";
+import { LoginContainer } from "./containers/LoginContainer";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { RootState } from "./reducers";
+import { connect, ConnectedProps } from "react-redux";
 
-const Router = () => {
+const mapStateToProps = (state: RootState) => ({
+  isLoggedIn: state.userReducer.isLoggedIn,
+});
+
+const connector = connect(mapStateToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const Router = (props: PropsFromRedux) => {
+  const { isLoggedIn } = props;
   return (
     <HashRouter>
       <Switch>
-        <Route path="/home" component={Home}></Route>
+        <ProtectedRoute path="/home" isLoggedIn={isLoggedIn}>
+          <Home />
+        </ProtectedRoute>
         <Route path="/wishlist" component={Wishlist}></Route>
-        <Route path="/" component={LoginLink}></Route>
+        <Route path="/" component={LoginContainer}></Route>
       </Switch>
     </HashRouter>
   );
-}
+};
 
 export default Router;
+
+export const ConnectedRouter = connector(Router);

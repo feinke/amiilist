@@ -1,4 +1,4 @@
-import {Item, AddToWishlistAction, ADD_TO_WISHLIST, RemoveFromWishlistAction, REMOVE_FROM_WISHLIST} from './types';
+import { Item, AddToWishlistAction, ADD_TO_WISHLIST, RemoveFromWishlistAction, REMOVE_FROM_WISHLIST } from "../constants/wishlistTypes";
 
 export const addToWishlist = (item: Item): AddToWishlistAction => {
   return {

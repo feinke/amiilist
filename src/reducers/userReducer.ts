@@ -3,7 +3,7 @@ import {
   SessionActionTypes,
   SET_USER_SESSION,
   UNSET_USER_SESSION,
-} from "../actions/user/types";
+} from "../constants/userTypes";
 
 const initialState: UserState = {
   email: "",

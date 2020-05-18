@@ -1,16 +1,15 @@
 import React from "react";
-import Router from "./Router";
-import { createStore } from "redux";
+import { ConnectedRouter } from "./Router";
 import { Provider } from "react-redux";
-import { reducers } from "./reducers";
+import configureStore from "./store";
 
-const store = createStore(reducers);
+const store = configureStore();
 
 function App() {
   return (
     <Provider store={store}>
       <div className="app">
-        <Router />
+        <ConnectedRouter />
       </div>
     </Provider>
   );
