@@ -6,6 +6,14 @@ export interface Item {
   image: string;
 }
 
+export interface Wishlist {
+  [K: string] : Item
+}
+
+export interface WishlistState {
+  items: Wishlist
+}
+
 export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 export const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST";
 
@@ -16,7 +24,7 @@ export interface AddToWishlistAction {
 
 export interface RemoveFromWishlistAction {
   type: typeof REMOVE_FROM_WISHLIST;
-  payload: number;
+  payload: string;
 }
 
 export type WishlistActions = AddToWishlistAction | RemoveFromWishlistAction;

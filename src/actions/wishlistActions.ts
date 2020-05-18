@@ -1,4 +1,10 @@
-import { Item, AddToWishlistAction, ADD_TO_WISHLIST, RemoveFromWishlistAction, REMOVE_FROM_WISHLIST } from "../constants/wishlistTypes";
+import {
+  Item,
+  AddToWishlistAction,
+  ADD_TO_WISHLIST,
+  RemoveFromWishlistAction,
+  REMOVE_FROM_WISHLIST,
+} from "../constants/wishlistTypes";
 
 export const addToWishlist = (item: Item): AddToWishlistAction => {
   return {
@@ -7,9 +13,9 @@ export const addToWishlist = (item: Item): AddToWishlistAction => {
   };
 };
 
-export const removeFromWishlist = (index: number): RemoveFromWishlistAction => {
+export const removeFromWishlist = (id: string): RemoveFromWishlistAction => {
   return {
     type: REMOVE_FROM_WISHLIST,
-    payload: index
-  }
-}
+    payload: id,
+  };
+};

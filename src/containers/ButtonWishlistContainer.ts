@@ -1,19 +1,19 @@
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../reducers";
-import { fetchProducts } from "../actions/productActions";
-import ProductList from "../components/ProductList";
+import { addToWishlist, removeFromWishlist } from "../actions/wishlistActions";
+import ButtonWishlist from "../components/ButtonWishlist";
 
 const mapStateToProps = (state: RootState) => ({
-  products: state.productReducer.products,
-  isFetching: state.productReducer.isFetching,
+  wishlist: state.wishlistReducer,
 });
 
 const mapDispatchToProps = {
-  fetchProduct: fetchProducts,
+  addToWishlist: addToWishlist,
+  removeFromWishlist: removeFromWishlist
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 export type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export const ProductListContainer = connector(ProductList);
+export const ButtonWishlistContainer = connector(ButtonWishlist);

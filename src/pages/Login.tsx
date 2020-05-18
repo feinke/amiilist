@@ -1,7 +1,6 @@
 import React from "react";
 import Navigation from "../components/Navigation";
 import { PropsFromRedux } from "../containers/LoginContainer";
-import { ProductListContainer } from "../containers/ProductListContainer";
 
 type Props = PropsFromRedux & {};
 
@@ -19,7 +18,6 @@ const Login: React.FunctionComponent<Props> = (props: PropsFromRedux) => {
       </div>
 
       <div>
-        <ProductListContainer />
       </div>
     </div>
   );

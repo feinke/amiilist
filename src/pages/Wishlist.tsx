@@ -11,9 +11,10 @@ const connector = connect(mapStateToProps, {});
 type Props = ConnectedProps<typeof connector>;
 
 const Wishlist = (props: Props) => {
+  const { wishlist } = props;
   return (
     <div>
-      {props.wishlist.map((item, index) => (
+      {Object.values(wishlist.items).map((item, index) => (
         <ProductItem item={item} key={index} />
       ))}
     </div>

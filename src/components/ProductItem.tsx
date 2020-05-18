@@ -1,15 +1,28 @@
 import React from "react";
 import { Item } from "../constants/wishlistTypes";
+import { Center, ImageMaxH300 } from "./ui/Utils";
+import styled from "styled-components";
 
 export type ProductItemProps = {
   item: Item;
   [x: string]: any;
 };
 
-export const ProductItem: React.FC<ProductItemProps> = (props: ProductItemProps) => {
+const ProductBox = styled.div`
+  margin-bottom: 1.5em;
+`;
+
+export const ProductItem = (props: ProductItemProps) => {
   const { item, children } = props;
-  return (<div>
-    <img src={item.image} alt={item.name} />
-    {children}
-  </div>);
+  return (
+    <ProductBox>
+      <Center>
+        <ImageMaxH300 src={item.image} alt={item.name} />
+      </Center>
+      <Center>
+        {item.name}
+      </Center>
+      <Center>{children}</Center>
+    </ProductBox>
+  );
 };

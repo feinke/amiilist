@@ -30,9 +30,8 @@ export const fetchProducts = () => {
     fetchAmiiboByFigure()
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data.amiibo);
         const ami: Item[] = data.amiibo;
-
+        //there's a lot of amiiboo, take first 10
         dispatch(receiveProducts(ami.splice(0, 10)));
       });
   };
