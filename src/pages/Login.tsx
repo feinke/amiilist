@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { PropsFromRedux } from "../containers/LoginContainer";
 import { Redirect } from "react-router-dom";
 import styled from "styled-components";
@@ -9,23 +9,29 @@ const LoginBox = styled.div`
   padding: 10px;
 `;
 
-const Login = (props: Props) => {
-  useEffect(props.loadGapi, []);
+class Login extends React.Component<Props> {
+  componentDidMount() {
+    this.props.loadGapi();
+  }
 
-  const onClickLogin = () => {
-    props.onLogin();
-  };
+  render() {
+    const { isLoggedIn, isFetching } = this.props;
 
-  return (
-    <LoginBox>
-      <div>
-        {props.isLoggedIn && <Redirect to="/home" />}
-        {!props.isFetching && (
-          <button onClick={onClickLogin}>Authenticate with Google</button>
-        )}
-      </div>
-    </LoginBox>
-  );
-};
+    const onClickLogin = () => {
+      this.props.onLogin();
+    };
+
+    return (
+      <LoginBox>
+        <div>
+          {isLoggedIn && <Redirect to="/home" />}
+          {!isFetching && (
+            <button onClick={onClickLogin}>Authenticate with Google</button>
+          )}
+        </div>
+      </LoginBox>
+    );
+  }
+}
 
 export default Login;

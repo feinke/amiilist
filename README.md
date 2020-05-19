@@ -4,6 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This project uses Google Authentication as a login.
 
+### !! Please change google api and client id at src/constants/api.ts
+
 There are two pages:
 
 - Home

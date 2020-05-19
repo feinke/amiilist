@@ -66,7 +66,7 @@ export const loadGapi = () => {
         if (currentUser !== null) {
           dispatch(setUserSession(currentUser));
         }
-      });
+      }).catch((err)=>console.error(err));
     });
   };
 };
