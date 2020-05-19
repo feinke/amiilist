@@ -2,6 +2,18 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This project uses Google Authentication as a login.
+
+There are two pages:
+
+- Home
+  - a list of products (Amiibo) taken from amiiboapi.com/
+  - you can add/remove the products to a wishlist 
+
+- Wishlist
+  - a list of wished products
+  - you can remove wished products
+
 ## Available Scripts
 
 In the project directory, you can run:
