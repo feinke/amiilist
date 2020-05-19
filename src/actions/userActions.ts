@@ -7,7 +7,9 @@ import {
   FETCHING_GAPI,
 } from "../constants/userTypes";
 import { GAPI_KEY, GCLIENT_ID } from "../constants/api";
-import { Dispatch } from "redux";
+import { Dispatch, Action } from "redux";
+import { ThunkAction } from "redux-thunk";
+import { RootState } from "../reducers";
 
 const SCOPE = "email";
 
@@ -44,7 +46,7 @@ const gapiGetCurrentUserId = () => {
   if (isGapiAuthorized()) {
     return user.getId();
   } else {
-    return null;
+    return "";
   }
 };
 
@@ -56,17 +58,51 @@ const initGapi = () => {
   });
 };
 
+const loadGapiAuth2 = () => {
+  return new Promise<string>((resolve, reject) => {
+    gapi.load("client:auth2", () => {
+      initGapi()
+        .then(() => {
+          const currentUser = gapiGetCurrentUserId();
+          resolve(currentUser);
+        })
+        .catch((err) => {
+          console.error(err);
+          reject("");
+        });
+    });
+  });
+};
+
+export const thunkSetGoogleUser = (): ThunkAction<
+  void,
+  RootState,
+  null,
+  Action
+> => async (dispatch) => {
+  dispatch(pending(true));
+  const currentUser = await loadGapiAuth2();
+  if (currentUser !== "") {
+    dispatch(setUserSession(currentUser));
+  }
+  dispatch(pending(false));
+
+};
+
+/** !!!! DEPRECATED!!!! */
 export const loadGapi = () => {
   return (dispatch: Dispatch) => {
     dispatch(pending(true));
     gapi.load("client:auth2", () => {
-      initGapi().then(() => {
-        dispatch(pending(false));
-        const currentUser = gapiGetCurrentUserId();
-        if (currentUser !== null) {
-          dispatch(setUserSession(currentUser));
-        }
-      }).catch((err)=>console.error(err));
+      initGapi()
+        .then(() => {
+          dispatch(pending(false));
+          const currentUser = gapiGetCurrentUserId();
+          if (currentUser !== null) {
+            dispatch(setUserSession(currentUser));
+          }
+        })
+        .catch((err) => console.error(err));
     });
   };
 };
@@ -75,10 +111,7 @@ export const gapiSignIn = () => {
   return (dispatch: Dispatch) => {
     const googleAuth = gapi.auth2.getAuthInstance();
     const currentUser = gapiGetCurrentUserId();
-
-    if (currentUser !== null) {
-      dispatch(setUserSession(currentUser));
-    } else {
+    if (currentUser === "") {
       googleAuth.signIn().then(
         (user) => {
           dispatch(setUserSession(user.getId()));
@@ -91,8 +124,11 @@ export const gapiSignIn = () => {
 
 export const gapiSignOut = () => {
   return (dispatch: Dispatch) => {
-     gapi.auth2.getAuthInstance().signOut().then(()=> {
-       dispatch(unsetUserSession());
-     })
+    gapi.auth2
+      .getAuthInstance()
+      .signOut()
+      .then(() => {
+        dispatch(unsetUserSession());
+      });
   };
 };
