@@ -18,8 +18,7 @@ const Router = (props: PropsFromRedux) => {
   return (
     <HashRouter>
       <Switch>
-        <ProtectedRoute path="/home" isLoggedIn={isLoggedIn}>
-          <Home />
+        <ProtectedRoute path="/home" isLoggedIn={isLoggedIn} component={Home}>
         </ProtectedRoute>
         <ProtectedRoute
           path="/wishlist"
