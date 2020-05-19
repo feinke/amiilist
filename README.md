@@ -4,7 +4,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This project uses Google Authentication as a login.
 
-### !! Please change google api and client id at src/constants/api.ts
+### !! Please create a .env file, put the following parameters and update key
+
+```
+REACT_APP_GAPI_KEY=GAPI_KEY
+REACT_APP_GCLIENT_ID=CLIENT_ID
+```
 
 There are two pages:
 
