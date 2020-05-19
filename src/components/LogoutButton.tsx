@@ -8,5 +8,5 @@ export const LogoutButton = (props: Props) => {
   const onClickLogout = () => {
     props.onLogout();
   };
-  return <ButtonLink onClick={onClickLogout}>Log Out</ButtonLink>;
+  return <ButtonLink onClick={onClickLogout} href="#">Log Out</ButtonLink>;
 };

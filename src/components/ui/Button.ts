@@ -15,9 +15,11 @@ export const Button = styled.button`
   }
 `;
 
-export const ButtonLink = styled(Button)`
+export const ButtonLink = styled.a`
   background: transparent;
   color: ${color.primary};
+  text-decoration: none;
+  font-size:14px;
   &:hover {
     background: transparent;
     color: ${color.secondary};

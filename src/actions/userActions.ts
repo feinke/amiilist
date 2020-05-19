@@ -27,8 +27,25 @@ export const unsetUserSession = (): UnsetUserSessionAction => {
 const pending = (payload: boolean): FetchingUserSessionAction => {
   return {
     type: FETCHING_GAPI,
-    payload
+    payload,
   };
+};
+
+const isGapiAuthorized = () => {
+  const googleAuth = gapi.auth2.getAuthInstance();
+  const user = googleAuth.currentUser.get();
+  return user.hasGrantedScopes(SCOPE);
+};
+
+const gapiGetCurrentUserId = () => {
+  const googleAuth = gapi.auth2.getAuthInstance();
+  const user = googleAuth.currentUser.get();
+
+  if (isGapiAuthorized()) {
+    return user.getId();
+  } else {
+    return null;
+  }
 };
 
 const initGapi = () => {
@@ -45,6 +62,10 @@ export const loadGapi = () => {
     gapi.load("client:auth2", () => {
       initGapi().then(() => {
         dispatch(pending(false));
+        const currentUser = gapiGetCurrentUserId();
+        if (currentUser !== null) {
+          dispatch(setUserSession(currentUser));
+        }
       });
     });
   };
@@ -53,24 +74,25 @@ export const loadGapi = () => {
 export const gapiSignIn = () => {
   return (dispatch: Dispatch) => {
     const googleAuth = gapi.auth2.getAuthInstance();
-    const user = googleAuth.currentUser.get();
-    const isAuthorized = user.hasGrantedScopes(SCOPE);
-    
-    if (isAuthorized) {
-      dispatch(setUserSession(user.getId()));
-    }
-    else {
-      googleAuth.signIn().then((user)=> {
-        dispatch(setUserSession(user.getId()));
-      },
-      err=> console.error("why u close dis"))
+    const currentUser = gapiGetCurrentUserId();
+
+    if (currentUser !== null) {
+      dispatch(setUserSession(currentUser));
+    } else {
+      googleAuth.signIn().then(
+        (user) => {
+          dispatch(setUserSession(user.getId()));
+        },
+        (err) => console.error("why u close dis")
+      );
     }
   };
 };
 
 export const gapiSignOut = () => {
   return (dispatch: Dispatch) => {
-    gapi.auth2.getAuthInstance().signOut();
-    dispatch(unsetUserSession());
+     gapi.auth2.getAuthInstance().signOut().then(()=> {
+       dispatch(unsetUserSession());
+     })
   };
 };

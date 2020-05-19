@@ -1,6 +1,9 @@
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "../reducers";
-import { fetchProducts } from "../actions/productActions";
+import {
+  fetchProducts,
+  fetchProductsIfNeeded,
+} from "../actions/productActions";
 import ProductList from "../components/ProductList";
 
 const mapStateToProps = (state: RootState) => ({
@@ -10,6 +13,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = {
   fetchProduct: fetchProducts,
+  fetchProductsIfNeeded: fetchProductsIfNeeded,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
