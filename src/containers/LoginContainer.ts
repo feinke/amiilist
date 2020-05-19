@@ -1,5 +1,9 @@
 import { connect, ConnectedProps } from "react-redux";
-import { loadGapi, gapiSignIn, gapiSignOut } from "../actions/userActions";
+import {
+  thunkSetGoogleUser,
+  gapiSignIn,
+  gapiSignOut,
+} from "../actions/userActions";
 import { Login } from "../pages";
 import {RootState} from "../reducers";
 
@@ -9,7 +13,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = {
-  loadGapi: loadGapi,
+  loadGapi: thunkSetGoogleUser,
   onLogin: gapiSignIn,
   onLogOut: gapiSignOut,
 };
