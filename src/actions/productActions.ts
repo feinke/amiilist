@@ -6,6 +6,7 @@ import {
 } from "../constants/productTypes";
 import { Dispatch } from "redux";
 import { Item } from "../constants/wishlistTypes";
+import { GET_BASE_API_FIGURE } from "../constants/api";
 
 export const requestProducts = (): RequestProductsAction => {
   return {
@@ -21,7 +22,7 @@ export const receiveProducts = (products: Item[]): ReceiveProductsAction => {
 };
 
 const fetchAmiiboByFigure = () => {
-  return fetch("https://www.amiiboapi.com/api/amiibo/?type=Figure");
+  return fetch(GET_BASE_API_FIGURE);
 };
 
 export const fetchProducts = () => {

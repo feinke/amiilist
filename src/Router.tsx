@@ -1,6 +1,6 @@
 import React from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
-import { Login, Home, Wishlist } from "./pages";
+import { Home, Wishlist } from "./pages";
 import { LoginContainer } from "./containers/LoginContainer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { RootState } from "./reducers";
@@ -21,7 +21,11 @@ const Router = (props: PropsFromRedux) => {
         <ProtectedRoute path="/home" isLoggedIn={isLoggedIn}>
           <Home />
         </ProtectedRoute>
-        <Route path="/wishlist" component={Wishlist}></Route>
+        <ProtectedRoute
+          path="/wishlist"
+          isLoggedIn={isLoggedIn}
+          component={Wishlist}
+        ></ProtectedRoute>
         <Route path="/" component={LoginContainer}></Route>
       </Switch>
     </HashRouter>

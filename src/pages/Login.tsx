@@ -1,25 +1,30 @@
-import React from "react";
-import Navigation from "../components/Navigation";
+import React, { useEffect } from "react";
 import { PropsFromRedux } from "../containers/LoginContainer";
+import { Redirect } from "react-router-dom";
+import styled from "styled-components";
 
 type Props = PropsFromRedux & {};
 
-const Login: React.FunctionComponent<Props> = (props: PropsFromRedux) => {
-  const onClickLogin = () => {
-    props.onLogin({ email: "accc@a.com" });
-  };
-  return (
-    <div>
-      <Navigation />
-      <div>
-        i am login?
-        {props.isLoggedIn ? <>Yes</> : <>No</>}
-        <button onClick={onClickLogin}>Login</button>
-      </div>
+const LoginBox = styled.div`
+  padding: 10px;
+`;
 
+const Login = (props: Props) => {
+  useEffect(props.loadGapi, []);
+
+  const onClickLogin = () => {
+    props.onLogin();
+  };
+
+  return (
+    <LoginBox>
       <div>
+        {props.isLoggedIn && <Redirect to="/home" />}
+        {!props.isFetching && (
+          <button onClick={onClickLogin}>Authenticate with Google</button>
+        )}
       </div>
-    </div>
+    </LoginBox>
   );
 };
 

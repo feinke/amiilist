@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
   [x:string]: any;
 };
 
-const ProtectedRoute: React.FC<Props> = (props) => {
+const ProtectedRoute = (props: Props) => {
   const { children, isLoggedIn, ...restProps } = props;
   return (
     <>

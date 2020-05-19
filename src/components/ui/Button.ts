@@ -14,3 +14,12 @@ export const Button = styled.button`
     background: ${color.gray};
   }
 `;
+
+export const ButtonLink = styled(Button)`
+  background: transparent;
+  color: ${color.primary};
+  &:hover {
+    background: transparent;
+    color: ${color.secondary};
+  }
+`;

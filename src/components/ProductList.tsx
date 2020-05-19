@@ -7,9 +7,7 @@ import {ButtonWishlistContainer} from "../containers/ButtonWishlistContainer";
 type Props = PropsFromRedux & {};
 
 const ProductList = (props: Props) => {
-  useEffect(() => {
-    props.fetchProduct();
-  }, []);
+  useEffect(props.fetchProduct, []);
 
   return (
     <Container>

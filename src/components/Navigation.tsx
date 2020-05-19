@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { LogoutContainer } from "../containers/LogoutContainer";
 
 const Navigation = () => {
   return (
@@ -10,8 +11,11 @@ const Navigation = () => {
       <li>
         <Link to="/wishlist">Wishlist</Link>
       </li>
+      <li>
+        <LogoutContainer />
+      </li>
     </ul>
   );
-}
+};
 
 export default Navigation;

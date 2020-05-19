@@ -1,5 +1,4 @@
 import {
-  Wishlist,
   WishlistState,
   WishlistActions,
   ADD_TO_WISHLIST,
