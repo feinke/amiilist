@@ -1,13 +1,21 @@
 import {
+  PendingProductsAction,
   RequestProductsAction,
   REQUEST_PRODUCTS,
   ReceiveProductsAction,
   RECEIVE_PRODUCTS,
+  PENDING_PRODUCTS,
 } from "../constants/productTypes";
 import { Dispatch } from "redux";
 import { Item } from "../constants/wishlistTypes";
 import { GET_BASE_API_FIGURE } from "../constants/api";
 import { RootState } from "../reducers";
+
+export const shouldF = (): PendingProductsAction => {
+  return {
+    type: PENDING_PRODUCTS,
+  };
+};
 
 export const requestProducts = (): RequestProductsAction => {
   return {
@@ -26,7 +34,7 @@ const fetchAmiiboByFigure = () => {
   return fetch(GET_BASE_API_FIGURE);
 };
 
-const shouldFetchProducts = (state: RootState) => {
+export const shouldFetchProducts = (state: RootState) => {
   const { products, isFetching } = state.productReducer;
   if (products.length) {
     return false;

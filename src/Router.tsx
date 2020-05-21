@@ -5,6 +5,7 @@ import { LoginContainer } from "./containers/LoginContainer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { RootState } from "./reducers";
 import { connect, ConnectedProps } from "react-redux";
+import { PlayHomeContainer } from "./pages/PlayHome";
 
 const mapStateToProps = (state: RootState) => ({
   isLoggedIn: state.userReducer.isLoggedIn,
@@ -25,6 +26,7 @@ const Router = (props: PropsFromRedux) => {
           isLoggedIn={isLoggedIn}
           component={Wishlist}
         ></ProtectedRoute>
+        <Route path="/ph" component={PlayHomeContainer}></Route>
         <Route path="/" component={LoginContainer}></Route>
       </Switch>
     </HashRouter>
