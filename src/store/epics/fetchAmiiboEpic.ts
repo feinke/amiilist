@@ -1,6 +1,5 @@
 import { ajax } from "rxjs/ajax";
 import { mergeMap, map, withLatestFrom } from "rxjs/operators";
-import { never, Observable, of, empty } from "rxjs";
 import {
   REQUEST_PRODUCTS,
   PENDING_PRODUCTS,
